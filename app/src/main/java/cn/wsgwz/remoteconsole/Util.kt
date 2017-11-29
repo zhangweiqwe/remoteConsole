@@ -8,7 +8,12 @@ import android.widget.Toast
  */
 class Util {
     companion object {
-        fun toast(msg:String,context:Context){
+        private lateinit var context:Context
+        fun init(context:Context){
+            this.context = context
+        }
+
+        fun toast(msg:String){
             Toast.makeText(context,msg, Toast.LENGTH_SHORT).show()
 
         }

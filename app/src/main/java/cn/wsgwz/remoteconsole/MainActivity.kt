@@ -1,9 +1,14 @@
 package cn.wsgwz.remoteconsole
 
+import android.content.ComponentName
 import android.content.Intent
+import android.content.ServiceConnection
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.IBinder
 import android.view.View
+import android.widget.Toast
+import cn.wsgwz.myapplication.IMyAidlInterface
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(),View.OnClickListener {
@@ -30,12 +35,12 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
         sample_text.text = stringFromJNI()
 
 
+
         registerBn.setOnClickListener(this)
         loginBn.setOnClickListener(this)
 
         talkBn.setOnClickListener(this)
     }
-
     /**
      * A native method that is implemented by the 'native-lib' native library,
      * which is packaged with this application.

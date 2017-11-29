@@ -3,7 +3,12 @@ package cn.wsgwz.remoteconsole;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Environment;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 
 import com.tencent.imsdk.TIMConversation;
 import com.tencent.imsdk.TIMConversationType;
@@ -20,6 +25,7 @@ import com.tencent.qalsdk.QALSDKManager;
 
 import java.util.List;
 
+import cn.wsgwz.remoteconsole.session.MessageSession;
 import tencent.tls.platform.TLSErrInfo;
 import tencent.tls.platform.TLSHelper;
 import tencent.tls.platform.TLSPwdRegListener;
@@ -33,12 +39,17 @@ import tencent.tls.platform.TLSUserInfo;
 public class MyApplication extends Application {
     private static final String TAG = MyApplication.class.getSimpleName();
 
+    public static final String PACKAGE_NAME = "cn.wsgwz.remoteconsole";
+    public static final String CACHE_DIR = "data/data/cn.wsgwz.remoteconsole/files";
+
 
     @Override
     public void onCreate() {
         super.onCreate();
 
+        Util.Companion.init(this);
         if(getProcessName(this).equals(getPackageName())){
+
 
 
 
@@ -54,10 +65,27 @@ public class MyApplication extends Application {
                     .enableCrashReport(false)
         .enableLogPrint(true)
                     .setLogLevel(TIMLogLevel.DEBUG)
-                    .setLogPath(Environment.getExternalStorageDirectory().getPath() + "/justfortest/");
+                    .setLogPath(CACHE_DIR);
+
+                               // .setLogPath(Environment.getExternalStorageDirectory().getPath() + "/justfortest/")
+
 
 //初始化SDK
             TIMManager.getInstance().init(getApplicationContext(), config);
+
+
+
+            /*
+            MessageSession.Companion.getInstance().init(this,"86-15123343709","123456");
+            MessageSession.Companion.getInstance().init(this,"86-15923549211","123456");
+             */
+
+
+            if(Build.VERSION.SDK_INT != 27){
+                MessageSession.Companion.getInstance().init(this,"86-15923549211","123456");
+            }else {
+                MessageSession.Companion.getInstance().init(this,"86-15123343709","123456");
+            }
 
 
             /*TIMManager.getInstance().addMessageListener(new TIMMessageListener() {
