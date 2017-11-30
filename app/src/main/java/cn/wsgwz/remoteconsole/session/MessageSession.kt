@@ -59,6 +59,10 @@ class MessageSession : TLSPwdLoginListener, TIMCallBack, TIMMessageListener {
 
     override fun onSuccess() {
         Util.toast("onSuccess()")
+        val setting = TIMOfflinePushSettings()
+        setting.isEnabled = true
+
+        TIMManager.getInstance().setOfflinePushSettings(setting)
     }
 
     override fun onError(p0: Int, p1: String?) {
