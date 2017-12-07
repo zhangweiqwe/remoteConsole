@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
         sample_text.text = stringFromJNI()
 
         //
-        Toast.makeText(this,"fdsf",Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this,"fdsf",Toast.LENGTH_SHORT).show()
 
 
         registerBn.setOnClickListener(this)
