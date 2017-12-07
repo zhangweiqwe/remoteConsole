@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
         // Example of a call to a native method
         sample_text.text = stringFromJNI()
 
+        //
 
 
         registerBn.setOnClickListener(this)
